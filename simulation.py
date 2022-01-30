@@ -2,6 +2,7 @@ import statistics
 from game import Game
 from word_list import WordList
 
+
 class Simulation:
     GAME_COUNT = 1000
 
@@ -10,19 +11,19 @@ class Simulation:
         self.failures = 0
         self.guess_counts = []
         self.failing_words = []
-    
+
     def run(self):
         words = self.select_words()
         for word in words:
             game = Game(correct_word=word)
             game.play()
             if game.success:
-                self.successes += 1 
+                self.successes += 1
                 self.guess_counts.append(game.guess_count())
             else:
                 self.failures += 1
                 self.failing_words.append(word)
-    
+
     def select_words(self):
         return WordList().choose_words(self.GAME_COUNT)
 
@@ -35,7 +36,8 @@ class Simulation:
     def stdev_guess_count(self):
         return statistics.stdev(self.guess_counts)
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     simulation = Simulation()
     simulation.run()
 
